@@ -1,9 +1,12 @@
+import requests
 from datetime import datetime
 from flask import render_template, request
 from run import app
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
+# My Domain
+ichiban_domain = "116.62.70.115"
 
 
 @app.route('/')
@@ -64,3 +67,43 @@ def get_count():
     """
     counter = Counters.query.filter(Counters.id == 1).first()
     return make_succ_response(0) if counter is None else make_succ_response(counter.count)
+
+
+@app.route('/api/oss/aliyun_upload', methods=['POST'])
+def aliyun_upload_wrap():
+    """
+    :return: 计数的值
+    """
+    file = request.files['file']
+    resp = request.post(f"{ichiban_domain}/api/oss/aliyun_upload", files={'file': file})
+    resp_j = resp.json()
+    print(f"/api/oss/aliyun_upload: {resp_j}")
+    return Response(resp_j, mimetype='application/json')
+
+
+@app.route('/api/search/', methods=['POST'])
+def search_wrap():
+    """
+    :return: 计数的值
+    """
+    # 获取请求体参数
+    params = request.get_json()
+    code = params['code']
+    resp = request.post(f"{ichiban_domain}/api/search/", json={'code': code})
+    resp_j = resp.json()
+    print(f"/api/search/: {resp_j}")
+    return Response(resp_j, mimetype='application/json')
+
+
+@app.route('/api/scan/', methods=['POST'])
+def scan_wrap():
+    """
+    :return: 计数的值
+    """
+    # 获取请求体参数
+    params = request.get_json()
+    url = params['url']
+    resp = request.post(f"{ichiban_domain}/api/scan/", json={'url': url})
+    resp_j = resp.json()
+    print(f"/api/scan/: {resp_j}")
+    return Response(resp_j, mimetype='application/json')
