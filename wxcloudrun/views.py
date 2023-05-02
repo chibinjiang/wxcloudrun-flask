@@ -6,7 +6,7 @@ from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 # My Domain
-ichiban_domain = "116.62.70.115"
+ichiban_domain = "http://116.62.70.115"
 
 
 @app.route('/')
