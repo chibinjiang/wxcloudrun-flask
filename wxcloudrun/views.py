@@ -78,7 +78,7 @@ def aliyun_upload_wrap():
     resp = request.post(f"{ichiban_domain}/api/oss/aliyun_upload", files={'file': file})
     resp_j = resp.json()
     print(f"/api/oss/aliyun_upload: {resp_j}")
-    return Response(resp_j, mimetype='application/json')
+    return Response(json.dumps(resp_j), mimetype='application/json')
 
 
 @app.route('/api/search/', methods=['POST'])
@@ -92,7 +92,7 @@ def search_wrap():
     resp = requests.post(f"{ichiban_domain}/api/search/", json={'code': code})
     resp_j = resp.json()
     print(f"/api/search/: {resp_j}")
-    return Response(resp_j, mimetype='application/json')
+    return Response(json.dumps(resp_j), mimetype='application/json')
 
 
 @app.route('/api/scan/', methods=['POST'])
@@ -106,4 +106,4 @@ def scan_wrap():
     resp = requests.post(f"{ichiban_domain}/api/scan/", json={'url': url})
     resp_j = resp.json()
     print(f"/api/scan/: {resp_j}")
-    return Response(resp_j, mimetype='application/json')
+    return Response(json.dumps(resp_j), mimetype='application/json')
