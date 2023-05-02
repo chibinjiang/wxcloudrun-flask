@@ -1,6 +1,6 @@
 import requests
 from datetime import datetime
-from flask import render_template, request
+from flask import render_template, request, Response
 from run import app
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid
 from wxcloudrun.model import Counters
@@ -89,7 +89,7 @@ def search_wrap():
     # 获取请求体参数
     params = request.get_json()
     code = params['code']
-    resp = request.post(f"{ichiban_domain}/api/search/", json={'code': code})
+    resp = requests.post(f"{ichiban_domain}/api/search/", json={'code': code})
     resp_j = resp.json()
     print(f"/api/search/: {resp_j}")
     return Response(resp_j, mimetype='application/json')
@@ -103,7 +103,7 @@ def scan_wrap():
     # 获取请求体参数
     params = request.get_json()
     url = params['url']
-    resp = request.post(f"{ichiban_domain}/api/scan/", json={'url': url})
+    resp = requests.post(f"{ichiban_domain}/api/scan/", json={'url': url})
     resp_j = resp.json()
     print(f"/api/scan/: {resp_j}")
     return Response(resp_j, mimetype='application/json')
