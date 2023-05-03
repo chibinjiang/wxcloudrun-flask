@@ -76,7 +76,11 @@ def aliyun_upload_wrap():
     :return: 计数的值
     """
     file = request.files['file']
-    resp = requests.post(f"{ichiban_domain}/api/oss/aliyun_upload", files={'file': file})
+    # filename =
+    resp = requests.post(
+        f"{ichiban_domain}/api/oss/aliyun_upload",
+        files={'file': file.read()}  # , 'filename': filename
+    )
     resp_j = resp.json()
     print(f"/api/oss/aliyun_upload: {resp_j}")
     return Response(json.dumps(resp_j), mimetype='application/json')
