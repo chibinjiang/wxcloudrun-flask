@@ -1,4 +1,5 @@
 import json
+import logging
 import requests
 from datetime import datetime
 from flask import render_template, request, Response
@@ -8,6 +9,7 @@ from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 # My Domain
 ichiban_domain = "http://116.62.70.115"
+logger = logging.getLogger(__name__)
 
 
 @app.route('/')
@@ -83,7 +85,7 @@ def aliyun_upload_wrap():
         files={'file': file, 'filename': file.filename}
     )
     resp_j = resp.json()
-    print(f"/api/oss/aliyun_upload: {resp_j}")
+    logger.info(f"/api/oss/aliyun_upload: {resp_j}")
     return Response(json.dumps(resp_j), mimetype='application/json')
 
 
@@ -97,7 +99,7 @@ def search_wrap():
     code = params['code']
     resp = requests.post(f"{ichiban_domain}/api/search/", json={'code': code})
     resp_j = resp.json()
-    print(f"/api/search/: {resp_j}")
+    logger.info(f"/api/search/: {resp_j}")
     return Response(json.dumps(resp_j), mimetype='application/json')
 
 
@@ -111,5 +113,5 @@ def scan_wrap():
     url = params['url']
     resp = requests.post(f"{ichiban_domain}/api/scan/", json={'url': url})
     resp_j = resp.json()
-    print(f"/api/scan/: {resp_j}")
+    logger.info(f"/api/scan/: {resp_j}")
     return Response(json.dumps(resp_j), mimetype='application/json')
