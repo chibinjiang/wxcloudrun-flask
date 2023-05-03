@@ -79,14 +79,11 @@ def aliyun_upload_wrap():
     """
     logger.info(f"request.files: {request.files}")
     file = request.files['file']
-    # filename =
-    resp = requests.post(
-        f"{ichiban_domain}/api/oss/aliyun_upload",
-        files={'file': file, 'filename': file.filename},
-        data={'file': file.read(), 'filename': file.filename}
-    )
+    filename = file.filename
+    resp = requests.post(f"{ichiban_domain}/oss/aliyun_upload", files={'file': (filename, file)})
     resp_j = resp.json()
-    logger.info(f"/api/oss/aliyun_upload: {resp_j}")
+    print(f"/oss/aliyun_upload: {resp_j}")
+    logger.info(f"/oss/aliyun_upload: {resp_j}")
     return Response(json.dumps(resp_j), mimetype='application/json')
 
 
