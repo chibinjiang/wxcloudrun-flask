@@ -22,7 +22,7 @@ def index():
 
 
 @app.route('/api/ping')
-def index():
+def ping():
     """
     :return: 返回index页面
     """
