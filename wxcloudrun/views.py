@@ -21,6 +21,15 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/api/ping')
+def index():
+    """
+    :return: 返回index页面
+    """
+    resp = requests.get(f"{ichiban_domain}/api/system/ping")
+    return make_succ_response(resp.text)
+
+
 @app.route('/api/count', methods=['POST'])
 def count():
     """
@@ -120,7 +129,8 @@ def scan_wrap():
 def wx_login_wrap():
     # 获取请求体参数
     data = request.get_json()
-    resp = requests.post(f"{ichiban_domain}/auth/wx_login", json=data)
+    logger.info(f"/api/auth/wx_login: {data}")
+    resp = requests.post(f"{ichiban_domain}/api/auth/wx_login", json=data)
     resp_j = resp.json()
     logger.info(f"/api/auth/wx_login: {resp_j}")
     return Response(json.dumps(resp_j), mimetype='application/json')
