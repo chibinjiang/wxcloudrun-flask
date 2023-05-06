@@ -114,3 +114,13 @@ def scan_wrap():
     resp_j = resp.json()
     logger.info(f"/api/scan/: {resp_j}")
     return Response(json.dumps(resp_j), mimetype='application/json')
+
+
+@app.route('/api/auth/wx_login', methods=['POST'])
+def wx_login_wrap():
+    # 获取请求体参数
+    data = request.get_json()
+    resp = requests.post(f"{ichiban_domain}/auth/wx_login", json=data)
+    resp_j = resp.json()
+    logger.info(f"/api/auth/wx_login: {resp_j}")
+    return Response(json.dumps(resp_j), mimetype='application/json')
