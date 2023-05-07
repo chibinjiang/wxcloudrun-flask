@@ -21,6 +21,14 @@ def index():
     return render_template('index.html')
 
 
+def post_request(path, data):
+    logger.info(f"{path}: {data}")
+    resp = requests.post(f"{ichiban_domain}{path}", json=data)
+    resp_j = resp.json()
+    logger.info(f"{path}: {resp_j}")
+    return Response(json.dumps(resp_j), mimetype='application/json')
+
+
 @app.route('/api/ping')
 def ping():
     """
@@ -103,12 +111,8 @@ def search_wrap():
     :return: 计数的值
     """
     # 获取请求体参数
-    params = request.get_json()
-    code = params['code']
-    resp = requests.post(f"{ichiban_domain}/api/search/", json={'code': code})
-    resp_j = resp.json()
-    logger.info(f"/api/search/: {resp_j}")
-    return Response(json.dumps(resp_j), mimetype='application/json')
+    data = request.get_json()
+    return post_request('/api/search/', data)
 
 
 @app.route('/api/scan/', methods=['POST'])
@@ -117,42 +121,33 @@ def scan_wrap():
     :return: 计数的值
     """
     # 获取请求体参数
-    params = request.get_json()
-    url = params['url']
-    resp = requests.post(f"{ichiban_domain}/api/scan/", json={'url': url})
-    resp_j = resp.json()
-    logger.info(f"/api/scan/: {resp_j}")
-    return Response(json.dumps(resp_j), mimetype='application/json')
+    data = request.get_json()
+    return post_request('/api/scan/', data)
 
 
 @app.route('/api/auth/wx_login', methods=['POST'])
 def wx_login_wrap():
     # 获取请求体参数
     data = request.get_json()
-    logger.info(f"/api/auth/wx_login: {data}")
-    resp = requests.post(f"{ichiban_domain}/api/auth/wx_login", json=data)
-    resp_j = resp.json()
-    logger.info(f"/api/auth/wx_login: {resp_j}")
-    return Response(json.dumps(resp_j), mimetype='application/json')
+    return post_request('/api/auth/wx_login', data)
 
 
 @app.route('/api/user/profile', methods=['POST'])
 def update_user_wrap():
     # 获取请求体参数
     data = request.get_json()
-    logger.info(f"/api/user/profile: {data}")
-    resp = requests.post(f"{ichiban_domain}/api/user/profile", json=data)
-    resp_j = resp.json()
-    logger.info(f"/api/user/profile: {resp_j}")
-    return Response(json.dumps(resp_j), mimetype='application/json')
+    return post_request('/api/user/profile', data)
 
 
 @app.route('/api/scan/record', methods=['POST'])
 def update_user_wrap():
     # 获取请求体参数
     data = request.get_json()
-    logger.info(f"/api/scan/record: {data}")
-    resp = requests.post(f"{ichiban_domain}/api/scan/record", json=data)
-    resp_j = resp.json()
-    logger.info(f"/api/scan/record: {resp_j}")
-    return Response(json.dumps(resp_j), mimetype='application/json')
+    return post_request("/api/scan/record", data)
+
+
+@app.route('/api/scan/history', methods=['POST'])
+def update_user_wrap():
+    # 获取请求体参数
+    data = request.get_json()
+    return post_request('/api/scan/history', data)
