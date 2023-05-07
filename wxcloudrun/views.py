@@ -13,7 +13,7 @@ ichiban_domain = "http://116.62.70.115"
 logger = logging.getLogger(__name__)
 
 
-@app.get('/')
+@app.route('/')
 def index():
     """
     :return: 返回index页面
@@ -29,7 +29,7 @@ def post_request(path, data):
     return Response(json.dumps(resp_j), mimetype='application/json')
 
 
-@app.get('/api/ping')
+@app.route('/api/ping')
 def ping():
     """
     :return: 返回index页面
@@ -38,7 +38,7 @@ def ping():
     return make_succ_response(resp.text)
 
 
-@app.post('/api/count')
+@app.route('/api/count', methods=["POST"])
 def count():
     """
     :return:计数结果/清除结果
@@ -81,7 +81,7 @@ def count():
         return make_err_response('action参数错误')
 
 
-@app.get('/api/count')
+@app.route('/api/count', methods=["POST"])
 def get_count():
     """
     :return: 计数的值
@@ -90,7 +90,7 @@ def get_count():
     return make_succ_response(0) if counter is None else make_succ_response(counter.count)
 
 
-@app.post('/api/oss/aliyun_upload')
+@app.route('/api/oss/aliyun_upload', methods=["POST"])
 def aliyun_upload_wrap():
     """
     :return: 计数的值
@@ -105,7 +105,7 @@ def aliyun_upload_wrap():
     return Response(json.dumps(resp_j), mimetype='application/json')
 
 
-@app.post('/api/search/')
+@app.route('/api/search/', methods=["POST"])
 def search_wrap():
     """
     :return: 计数的值
@@ -115,7 +115,7 @@ def search_wrap():
     return post_request('/api/search/', data)
 
 
-@app.post('/api/scan/')
+@app.route('/api/scan/', methods=["POST"])
 def scan_wrap():
     """
     :return: 计数的值
@@ -125,29 +125,29 @@ def scan_wrap():
     return post_request('/api/scan/', data)
 
 
-@app.post('/api/auth/wx_login')
+@app.route('/api/auth/wx_login', methods=["POST"])
 def wx_login_wrap():
     # 获取请求体参数
     data = request.get_json()
     return post_request('/api/auth/wx_login', data)
 
 
-@app.post('/api/user/profile')
+@app.route('/api/user/profile', methods=["POST"])
 def update_user_wrap():
     # 获取请求体参数
     data = request.get_json()
     return post_request('/api/user/profile', data)
 
 
-@app.post('/api/scan/record')
-def update_user_wrap():
+@app.route('/api/scan/record', methods=["POST"])
+def scan_record_wrap():
     # 获取请求体参数
     data = request.get_json()
     return post_request("/api/scan/record", data)
 
 
-@app.post('/api/scan/history')
-def update_user_wrap():
+@app.route('/api/scan/history', methods=["POST"])
+def scan_history_wrap():
     # 获取请求体参数
     data = request.get_json()
     return post_request('/api/scan/history', data)
