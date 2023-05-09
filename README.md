@@ -122,3 +122,6 @@ curl -X POST -H 'content-type: application/json' -d '{"action": "inc"}' https://
 ## License
 
 [MIT](./LICENSE)
+
+## Notes
+- 提交的commit message 不能相同

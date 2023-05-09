@@ -138,15 +138,29 @@ def update_user_wrap():
     return post_request('/api/user/profile', data)
 
 
-@app.route('/api/scan/record', methods=["POST"])
-def scan_record_wrap():
+@app.route('/api/history/scan/list', methods=["POST"])
+def get_scan_code_history_wrap():
     # 获取请求体参数
     data = request.get_json()
-    return post_request("/api/scan/record", data)
+    return post_request("/api/history/scan/list", data)
 
 
-@app.route('/api/scan/history', methods=["POST"])
-def scan_history_wrap():
+@app.route('/api/history/scan/record', methods=["POST"])
+def update_scan_code_history_wrap():
     # 获取请求体参数
     data = request.get_json()
-    return post_request('/api/scan/history', data)
+    return post_request("/api/history/scan/record", data)
+
+
+@app.route('/api/history/product/list', methods=["POST"])
+def get_product_view_history_history_wrap():
+    # 获取请求体参数
+    data = request.get_json()
+    return post_request("/api/history/product/list", data)
+
+
+@app.route('/api/history/product/view', methods=["POST"])
+def update_product_view_history_wrap():
+    # 获取请求体参数
+    data = request.get_json()
+    return post_request("/api/history/product/view", data)
