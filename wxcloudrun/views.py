@@ -91,9 +91,6 @@ def get_count():
 
 @app.route('/api/oss/aliyun_upload', methods=["POST"])
 def aliyun_upload_wrap():
-    """
-    :return: 计数的值
-    """
     logger.info(f"request.files: {request.files}")
     file = request.files['file']
     filename = file.filename
@@ -104,63 +101,71 @@ def aliyun_upload_wrap():
     return Response(json.dumps(resp_j), mimetype='application/json')
 
 
-@app.route('/api/search/', methods=["POST"])
-def search_wrap():
-    """
-    :return: 计数的值
-    """
+@app.route('/api/search/product', methods=["POST"])
+def search_product_wrap():
     # 获取请求体参数
     data = request.get_json()
-    return post_request('/api/search/', data)
+    return post_request('/api/search/product', data)
+
+
+@app.route('/api/search/animal', methods=["POST"])
+def search_animal_wrap():
+    # 获取请求体参数
+    data = request.get_json()
+    return post_request('/api/search/animal', data)
+
+
+@app.route('/api/search/plant', methods=["POST"])
+def search_plant_wrap():
+    # 获取请求体参数
+    data = request.get_json()
+    return post_request('/api/search/plant', data)
+
+
+@app.route('/api/search/redwine', methods=["POST"])
+def search_redwine_wrap():
+    # 获取请求体参数
+    data = request.get_json()
+    return post_request('/api/search/redwine', data)
 
 
 @app.route('/api/scan/', methods=["POST"])
 def scan_wrap():
-    """
-    :return: 计数的值
-    """
-    # 获取请求体参数
     data = request.get_json()
     return post_request('/api/scan/', data)
 
 
 @app.route('/api/auth/wx_login', methods=["POST"])
 def wx_login_wrap():
-    # 获取请求体参数
     data = request.get_json()
     return post_request('/api/auth/wx_login', data)
 
 
 @app.route('/api/user/profile', methods=["POST"])
 def update_user_wrap():
-    # 获取请求体参数
     data = request.get_json()
     return post_request('/api/user/profile', data)
 
 
 @app.route('/api/history/scan/list', methods=["POST"])
 def get_scan_code_history_wrap():
-    # 获取请求体参数
     data = request.get_json()
     return post_request("/api/history/scan/list", data)
 
 
 @app.route('/api/history/scan/record', methods=["POST"])
 def update_scan_code_history_wrap():
-    # 获取请求体参数
     data = request.get_json()
     return post_request("/api/history/scan/record", data)
 
 
 @app.route('/api/history/product/list', methods=["POST"])
 def get_product_view_history_history_wrap():
-    # 获取请求体参数
     data = request.get_json()
     return post_request("/api/history/product/list", data)
 
 
 @app.route('/api/history/product/view', methods=["POST"])
 def update_product_view_history_wrap():
-    # 获取请求体参数
     data = request.get_json()
     return post_request("/api/history/product/view", data)
