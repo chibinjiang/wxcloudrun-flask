@@ -108,25 +108,11 @@ def search_product_wrap():
     return post_request('/api/search/product', data)
 
 
-@app.route('/api/search/animal', methods=["POST"])
-def search_animal_wrap():
+@app.route('/api/search/ocr', methods=["POST"])
+def ocr_wrap():
     # 获取请求体参数
     data = request.get_json()
-    return post_request('/api/search/animal', data)
-
-
-@app.route('/api/search/plant', methods=["POST"])
-def search_plant_wrap():
-    # 获取请求体参数
-    data = request.get_json()
-    return post_request('/api/search/plant', data)
-
-
-@app.route('/api/search/redwine', methods=["POST"])
-def search_redwine_wrap():
-    # 获取请求体参数
-    data = request.get_json()
-    return post_request('/api/search/redwine', data)
+    return post_request('/api/search/ocr', data)
 
 
 @app.route('/api/scan/', methods=["POST"])
