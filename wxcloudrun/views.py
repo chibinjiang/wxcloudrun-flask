@@ -155,3 +155,9 @@ def get_product_view_history_history_wrap():
 def update_product_view_history_wrap():
     data = request.get_json()
     return post_request("/api/history/product/view", data)
+
+
+@app.route('/api/generator/base64', methods=["POST"])
+def update_product_view_history_wrap():
+    data = request.get_json()
+    return post_request("/api/generator/base64", data)
