@@ -158,6 +158,6 @@ def update_product_view_history_wrap():
 
 
 @app.route('/api/generator/base64', methods=["POST"])
-def update_product_view_history_wrap():
+def generate_code_image():
     data = request.get_json()
     return post_request("/api/generator/base64", data)
