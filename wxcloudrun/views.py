@@ -133,10 +133,10 @@ def update_user_wrap():
     return post_request('/api/user/profile', data)
 
 
-@app.route('/api/history/most_popular', methods=["GET"])
+@app.route('/api/history/hot', methods=["GET"])
 def get_most_popular_products_wrap():
     data = request.get_json()
-    return post_request("/api/history/most_popular", data)
+    return post_request("/api/history/hot", data)
 
 
 @app.route('/api/history/scan/list', methods=["POST"])
