@@ -145,7 +145,7 @@ def get_scan_code_history_wrap():
 
 
 @app.route('/api/history/gds/record', methods=["POST"])
-def get_scan_code_history_wrap():
+def save_gds_product_wrap():
     data = request.get_json()
     return post_request("/api/history/gds/record", data)
 
