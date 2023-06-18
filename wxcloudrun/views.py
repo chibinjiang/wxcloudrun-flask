@@ -7,7 +7,6 @@ from run import app
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
-# My Domain
 ichiban_domain = "http://116.62.70.115"
 logger = logging.getLogger(__name__)
 
@@ -31,7 +30,7 @@ def post_request(path, data):
 @app.route('/api/ping')
 def ping():
     """
-    :return: 返回index页面
+    :return: ping
     """
     resp = requests.get(f"{ichiban_domain}/api/system/ping")
     return make_succ_response(resp.text)
