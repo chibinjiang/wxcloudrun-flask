@@ -13,17 +13,16 @@ logger = logging.getLogger(__name__)
 
 @app.route('/')
 def index():
-    """
-    :return: 返回index页面
-    """
     return render_template('index.html')
 
 
 def post_request(path, data, ip=''):
     logger.info(f"{path}: {data}")
-    resp = requests.post(f"{ichiban_domain}{path}", json=data, headers={
-        'Client-IP': ip
-    })
+    resp = requests.post(
+        f"{ichiban_domain}{path}",
+        json=data,
+        headers={'Client-IP': ip}
+    )
     resp_j = resp.json()
     logger.info(f"{path}: {resp_j}")
     return Response(json.dumps(resp_j), mimetype='application/json')
@@ -31,9 +30,6 @@ def post_request(path, data, ip=''):
 
 @app.route('/api/ping')
 def ping():
-    """
-    :return: ping
-    """
     resp = requests.get(f"{ichiban_domain}/api/system/ping")
     return make_succ_response(resp.text)
 
