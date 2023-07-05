@@ -19,9 +19,11 @@ def index():
     return render_template('index.html')
 
 
-def post_request(path, data):
+def post_request(path, data, ip=''):
     logger.info(f"{path}: {data}")
-    resp = requests.post(f"{ichiban_domain}{path}", json=data)
+    resp = requests.post(f"{ichiban_domain}{path}", json=data, headers={
+        'Client-IP': ip
+    })
     resp_j = resp.json()
     logger.info(f"{path}: {resp_j}")
     return Response(json.dumps(resp_j), mimetype='application/json')
@@ -93,7 +95,11 @@ def aliyun_upload_wrap():
     logger.info(f"request.files: {request.files}")
     file = request.files['file']
     filename = file.filename
-    resp = requests.post(f"{ichiban_domain}/api/oss/aliyun_upload", files={'file': (filename, file)})
+    resp = requests.post(
+        f"{ichiban_domain}/api/oss/aliyun_upload",
+        files={'file': (filename, file)},
+        request.remote_addr
+    )
     resp_j = resp.json()
     print(f"/oss/aliyun_upload: {resp_j}")
     logger.info(f"/oss/aliyun_upload: {resp_j}")
@@ -104,71 +110,95 @@ def aliyun_upload_wrap():
 def search_product_wrap():
     # 获取请求体参数
     data = request.get_json()
-    return post_request('/api/search/product', data)
+    return post_request(
+        '/api/search/product', data, request.remote_addr
+    )
 
 
 @app.route('/api/search/ocr', methods=["POST"])
 def ocr_wrap():
     # 获取请求体参数
     data = request.get_json()
-    return post_request('/api/search/ocr', data)
+    return post_request(
+        '/api/search/ocr', data, request.remote_addr
+    )
 
 
 @app.route('/api/scan/', methods=["POST"])
 def scan_wrap():
     data = request.get_json()
-    return post_request('/api/scan/', data)
+    return post_request(
+        '/api/scan/', data, request.remote_addr
+    )
 
 
 @app.route('/api/auth/wx_login', methods=["POST"])
 def wx_login_wrap():
     data = request.get_json()
-    return post_request('/api/auth/wx_login', data)
+    return post_request(
+        '/api/auth/wx_login', data, request.remote_addr
+    )
 
 
 @app.route('/api/user/profile', methods=["POST"])
 def update_user_wrap():
     data = request.get_json()
-    return post_request('/api/user/profile', data)
+    return post_request(
+        '/api/user/profile', data, request.remote_addr
+    )
 
 
 @app.route('/api/history/hot', methods=["POST"])
 def get_most_popular_products_wrap():
     data = request.get_json()
-    return post_request("/api/history/hot", data)
+    return post_request(
+        "/api/history/hot", data, request.remote_addr
+    )
 
 
 @app.route('/api/history/scan/list', methods=["POST"])
 def get_scan_code_history_wrap():
     data = request.get_json()
-    return post_request("/api/history/scan/list", data)
+    return post_request(
+        "/api/history/scan/list", data, request.remote_addr
+    )
 
 
 @app.route('/api/history/gds/record', methods=["POST"])
 def save_gds_product_wrap():
     data = request.get_json()
-    return post_request("/api/history/gds/record", data)
+    return post_request(
+        "/api/history/gds/record", data, request.remote_addr
+    )
 
 
 @app.route('/api/history/scan/record', methods=["POST"])
 def update_scan_code_history_wrap():
     data = request.get_json()
-    return post_request("/api/history/scan/record", data)
+    return post_request(
+        "/api/history/scan/record", data, request.remote_addr
+    )
 
 
 @app.route('/api/history/product/list', methods=["POST"])
 def get_product_view_history_history_wrap():
     data = request.get_json()
-    return post_request("/api/history/product/list", data)
+    return post_request(
+        "/api/history/product/list", data, request.remote_addr
+    )
 
 
 @app.route('/api/history/product/view', methods=["POST"])
 def update_product_view_history_wrap():
     data = request.get_json()
-    return post_request("/api/history/product/view", data)
+    return post_request(
+        "/api/history/product/view", data, request.remote_addr
+    )
 
 
 @app.route('/api/generator/base64', methods=["POST"])
 def generate_code_image():
     data = request.get_json()
-    return post_request("/api/generator/base64", data)
+    return post_request(
+        "/api/generator/base64", data, request.remote_addr
+    )
