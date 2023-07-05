@@ -97,8 +97,7 @@ def aliyun_upload_wrap():
     filename = file.filename
     resp = requests.post(
         f"{ichiban_domain}/api/oss/aliyun_upload",
-        files={'file': (filename, file)},
-        request.remote_addr
+        files={'file': (filename, file)}
     )
     resp_j = resp.json()
     print(f"/oss/aliyun_upload: {resp_j}")
