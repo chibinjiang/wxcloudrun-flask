@@ -119,6 +119,15 @@ def ocr_wrap():
     )
 
 
+@app.route('/api/search/keywords', methods=["POST"])
+def get_gds_keywords():
+    # 获取请求体参数
+    data = request.get_json()
+    return post_request(
+        '/api/search/keywords', data, request.remote_addr
+    )
+
+
 @app.route('/api/scan/', methods=["POST"])
 def scan_wrap():
     data = request.get_json()
