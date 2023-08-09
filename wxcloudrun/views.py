@@ -7,7 +7,7 @@ from run import app
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
-ichiban_domain = "http://116.62.70.115"
+ichiban_domain = "http://43.138.187.204"
 logger = logging.getLogger(__name__)
 
 
