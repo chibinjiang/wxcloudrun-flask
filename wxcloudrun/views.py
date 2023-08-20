@@ -206,3 +206,11 @@ def generate_code_image():
     return post_request(
         "/api/generator/base64", data, request.remote_addr
     )
+
+
+@app.route('/api/unit/transform', methods=["POST"])
+def transform_unit():
+    data = request.get_json()
+    return post_request(
+        "/api/unit/transform", data, request.remote_addr
+    )
