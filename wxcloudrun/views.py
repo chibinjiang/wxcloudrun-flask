@@ -214,3 +214,27 @@ def transform_unit():
     return post_request(
         "/api/unit/transform", data, request.remote_addr
     )
+
+
+@app.route('/api/unit/list', methods=["POST"])
+def get_unit_list():
+    data = request.get_json()
+    return post_request(
+        "/api/unit/list", data, request.remote_addr
+    )
+
+
+@app.route('/express/feeling/list', methods=["POST"])
+def get_feelings():
+    data = request.get_json()
+    return post_request(
+        "/express/feeling/list", data, request.remote_addr
+    )
+
+
+@app.route('/express/feeling/express', methods=["POST"])
+def express_feeling():
+    data = request.get_json()
+    return post_request(
+        "/express/feeling/express", data, request.remote_addr
+    )
