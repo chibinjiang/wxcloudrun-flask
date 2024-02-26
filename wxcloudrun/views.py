@@ -238,3 +238,19 @@ def express_feeling():
     return post_request(
         "/express/feeling/express", data, request.remote_addr
     )
+
+
+@app.route('/express/record/list', methods=["POST"])
+def get_user_records():
+    data = request.get_json()
+    return post_request(
+        "/express/record/list", data, request.remote_addr
+    )
+
+
+@app.route('/express/record/user_do', methods=["POST"])
+def record_user_action():
+    data = request.get_json()
+    return post_request(
+        "/express/record/user_do", data, request.remote_addr
+    )
