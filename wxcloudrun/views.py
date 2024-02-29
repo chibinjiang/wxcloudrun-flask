@@ -240,6 +240,22 @@ def express_feeling():
     )
 
 
+@app.route('/express/feeling/continue', methods=["POST"])
+def continue_express_feeling():
+    data = request.get_json()
+    return post_request(
+        "/express/feeling/continue", data, request.remote_addr
+    )
+
+
+@app.route('/express/answer/random', methods=["POST"])
+def get_book_of_answer():
+    data = request.get_json()
+    return post_request(
+        "/express/answer/random", data, request.remote_addr
+    )
+
+
 @app.route('/express/record/list', methods=["POST"])
 def get_user_records():
     data = request.get_json()
