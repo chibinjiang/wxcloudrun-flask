@@ -270,3 +270,12 @@ def record_user_action():
     return post_request(
         "/express/record/user_do", data, request.remote_addr
     )
+
+
+@app.route('/lvya/callback', methods=["POST"])
+def get_lvya_callback():
+    data = request.get_json()
+    logger.info(f"绿芽参数: {data}")
+    return post_request(
+        "/lvya/callback", data, request.remote_addr
+    )
