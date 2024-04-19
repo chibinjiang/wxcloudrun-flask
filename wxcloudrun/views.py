@@ -240,6 +240,14 @@ def express_feeling():
     )
 
 
+@app.route('/express/feeling/labels', methods=["POST"])
+def get_labels():
+    data = request.get_json()
+    return post_request(
+        "/express/feeling/labels", data, request.remote_addr
+    )
+
+
 @app.route('/express/feeling/continue', methods=["POST"])
 def continue_express_feeling():
     data = request.get_json()
